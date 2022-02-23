@@ -1,0 +1,52 @@
+@model Projeto_Estudo_MVC.Models.LivroCadastroModel
+@{
+    ViewData["Title"] = "Cadastro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Cadastro de Livros</h3>
+<p>
+    Preencha o formulário para incluir um livro.
+</p>
+<hr />
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary mb-2">
+        <strong>@TempData["Mensagem"]</strong>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    <label>Nome do livro:</label>
+    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+
+    <div class="text-danger">
+        <!-- tex-danger : vai escrever um texto de alerta em vermelho-->
+        @Html.ValidationMessageFor(mode => Model.Nome)
+    </div>
+    <br />
+
+    <label>Preço do livro:</label>
+    @Html.TextBoxFor(model => model.Preco, new { @class = "form-control" })
+    <div class="text-danger">
+        <!-- tex-danger : vai escrever um texto de alerta em vermelho-->
+        @Html.ValidationMessageFor(mode => Model.Preco)
+    </div>
+    <br />
+
+    <label>Quantidade do livro:</label>
+    @Html.TextBoxFor(model => model.Quantidade, new { @class = "form-control" })
+    <div class="text-danger">
+        <!-- tex-danger : vai escrever um texto de alerta em vermelho-->
+        @Html.ValidationMessageFor(mode => Model.Quantidade)
+    </div>
+    <br />
+
+    <input type="submit" value="Realizar Cadastro"
+           class="btn btn-dark" />
+
+
+}
+  

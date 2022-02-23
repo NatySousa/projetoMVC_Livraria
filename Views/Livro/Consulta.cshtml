@@ -1,0 +1,63 @@
+@model Projeto_Estudo_MVC.Models.LivroConsultaModel
+@{
+    ViewData["Title"] = "Consulta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Consulta de Livros</h3>
+<p>
+    Listagem de livros cadastrados no sistema.
+</p>
+<hr />
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary mb-2">
+        <strong>@TempData["Mensagem"]</strong>
+    </div>
+}
+
+<table id="tabela_dados" class="table table-sm">
+    <thead>
+        <tr>
+            <th>Nome do Livro</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Data de Cadastro</th>
+            <th>Operações</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Livros)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Preco.ToString("c")</td>
+                <td>@item.Quantidade</td>
+                <td>@item.DataCadastro.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a href="/Livro/Edicao?id=@item.IdLivro" class="btn btn-primary btn-sm">
+                        Alterar <!--btn é botão, primary é a cor azul "turqueza" no bootstrap, sm é abreviação de small-->
+                    </a>
+                    <a href="/Livro/Exclusao?id=@item.IdLivro"
+                       onclick="return confirm
+                       ('Deseja excluir o Livro @item.Nome?');
+                       " class="btn btn-danger btn-sm">
+                        Excluir <!--danger é a cor vermelha no bootstrap-->
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                Quantidade de registros: @Model.Livros.Count
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+  

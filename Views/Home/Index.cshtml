@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Sistema para controle de livros</h3>
+<p>
+    Projeto desenvolvido em ASP.NET CORE MVC com MySql.
+
+    <hr />
+
+    <div id="grafico"></div>
+
+</p>
+
+@section scripts {
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    <script>
+        //função para acessar o método ObterDadosGrafico (JsonResult) da classe LivroController
+        $(document).ready(
+            function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Livro/ObterDadosGrafico',
+                    success: function (result) {
+
+                        var array = [];
+
+                        for (var i = 0; i < result.length; i++) {
+                            array.push([
+                                result[i].dataCadastro, result[i].total
+                            ]);
+                        }
+
+                        new Highcharts.Chart({
+                            chart: {
+                                type: 'pie',
+                                renderTo: 'grafico'
+
+                            },
+                            title: {
+                                text: 'Quantidade de livros cadastrados por data'
+                            },
+                            subtitle: {
+                                text: 'Somatorio da quantidade de livros'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    innerSize: '55%'
+                                }
+                            },
+                            series: [
+                                { data: array } //dados do gráfico..
+                            ]
+                        })
+                    }
+                })
+            }
+        )
+    </script>
+}

@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Layout</title>
+
+    <!-- arquivos de folha de estilo CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <!-- referencia da folha de estilos CSS do jquery datatable -->
+    <link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- espaço de tamanho = 12 -->
+            <div class="col-md-3">
+
+                <img src="https://thumbs.dreamstime.com/b/grupo-do-vetor-da-tipografia-de-elementos-do-projeto-do-vintage-para-livraria-ou-biblioteca-51642176.jpg"
+                     class="img-fluid" />
+                <br />
+                <br />
+
+                <div class="d-grid gap-2 mt-2">
+                    <a href="/Home/Index" class="btn btn-outline-primary">
+                        Página inicial
+                    </a>
+                </div>
+
+                <div class="d-grid gap-2 mt-2">
+                    <a href="/Livro/Cadastro" class="btn btn-outline-primary">
+                        Cadastrar Livros
+                    </a>
+                </div>
+
+                <div class="d-grid gap-2 mt-2">
+                    <a href="/Livro/Consulta" class="btn btn-outline-primary">
+                        Consultar Livros
+                    </a>
+                </div>
+                <div class="d-grid gap-2 mt-2 mb-3">
+                    <a href="/Livro/Relatorio" class="btn btn-outline-primary">
+                        Relatórios de Livros
+
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <!-- local para exibir o conteudo das demais páginas -->
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!-- arquivos de extensão JS (JavaScript) -->
+    <script src="~/js/bootstrap.js"></script>
+
+    <!-- caminho da biblioteca do jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- caminho da biblioteca JS do datatables -->
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- função para habilitar o datatable -->
+    <script>
+        $(document).ready(function () {
+            $('#tabela_dados').DataTable({
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 20, 50, 100],
+                "oLanguage": {
+                    "sUrl": "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+
+    </script>
+
+    <!--Criando uma seção para inserir código Java Script de outras páginas-->
+    <!--Tem que criar essa seção se não o  RenderBody vai colocar o JS no lugar errado e "vai dar ruim no projeto"-->
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+

@@ -1,0 +1,38 @@
+
+@model Projeto_Estudo_MVC.Models.LivroRelatorioModel
+@{
+    ViewData["Title"] = "Relatorio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Relatórios de Livros</h3>
+<p>
+    Utilize o formulário para gerar o relatório desejado.
+</p>
+<hr />
+@using (Html.BeginForm())
+{
+    <label>Informe a data de início do período:</label>
+    @Html.TextBoxFor(model => model.DataMin,
+        new { @class = "form-control", @type = "date" })
+    <div class="text-danger">
+        @Html.ValidationMessageFor(model => model.DataMin)
+    </div>
+    <br />
+
+    <label>Informe a data de fim do período:</label>
+    @Html.TextBoxFor(model => model.DataMax,
+        new { @class = "form-control", @type = "datetime-local" })
+    <div class="text-danger">
+        @Html.ValidationMessageFor(model => model.DataMax)
+    </div>
+    <br />
+
+    <input type="submit" value="Gerar Relatório"
+           class="btn btn-success" />
+    
+}
+
+
+
+
